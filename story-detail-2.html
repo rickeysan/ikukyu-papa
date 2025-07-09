@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体験談詳細 - パパの育休体験談</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: 'none',
+                                color: '#333',
+                                a: {
+                                    color: '#3182ce',
+                                    '&:hover': {
+                                        color: '#2c5282',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            plugins: [
+                function({addBase, theme}) {
+                    addBase({
+                        'h1': { fontSize: theme('fontSize.2xl'), fontWeight: theme('fontWeight.bold'), marginBottom: theme('spacing.4') },
+                        'h2': { fontSize: theme('fontSize.xl'), fontWeight: theme('fontWeight.bold'), marginBottom: theme('spacing.3') },
+                        'h3': { fontSize: theme('fontSize.lg'), fontWeight: theme('fontWeight.bold'), marginBottom: theme('spacing.2') },
+                        'p': { marginBottom: theme('spacing.4') },
+                        'ul': { listStyleType: 'disc', paddingLeft: theme('spacing.4'), marginBottom: theme('spacing.4') },
+                        'ol': { listStyleType: 'decimal', paddingLeft: theme('spacing.4'), marginBottom: theme('spacing.4') },
+                        'blockquote': { 
+                            borderLeftWidth: '4px',
+                            borderLeftColor: theme('colors.gray.300'),
+                            paddingLeft: theme('spacing.4'),
+                            marginBottom: theme('spacing.4'),
+                            fontStyle: 'italic'
+                        },
+                    })
+                }
+            ],
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Markdown Styles */
+        .markdown-content h1 { @apply text-3xl font-bold mb-4; }
+        .markdown-content h2 { @apply text-2xl font-bold mb-3 mt-6; }
+        .markdown-content h3 { @apply text-xl font-bold mb-2 mt-4; }
+        .markdown-content p { @apply mb-4; }
+        .markdown-content ul { @apply list-disc pl-6 mb-4; }
+        .markdown-content ol { @apply list-decimal pl-6 mb-4; }
+        .markdown-content li { @apply mb-2 pl-2; }
+        .markdown-content blockquote { 
+            @apply border-l-4 border-gray-300 pl-4 italic my-4;
+        }
+        .markdown-content a { 
+            @apply text-blue-600 hover:text-blue-800 underline;
+        }
+        .markdown-content code {
+            @apply bg-gray-100 rounded px-1 py-0.5 font-mono text-sm;
+        }
+        .markdown-content pre {
+            @apply bg-gray-100 rounded p-4 mb-4 overflow-x-auto;
+        }
+        .markdown-content hr {
+            @apply my-8 border-t border-gray-300;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="index.html" class="flex items-center py-4">
+                            <span class="font-semibold text-gray-500 text-lg">パパの育休体験談</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="py-4 px-2 text-gray-500 hover:text-blue-500 transition duration-300">ホーム</a>
+                    <a href="stories.html" class="py-4 px-2 text-blue-500 font-semibold border-b-4 border-blue-500">体験談一覧</a>
+                    <a href="about-ikukyu.html" class="py-4 px-2 text-gray-500 hover:text-blue-500 transition duration-300">育休制度について</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <article class="bg-white rounded-lg shadow-md p-6 md:p-8">
+            <!-- Story Header -->
+            <header class="mb-8">
+                <h1 id="story-title" class="text-3xl font-bold text-gray-800 mb-4"></h1>
+                <div class="flex items-center text-gray-600 text-sm">
+                    <span id="story-date" class="mr-4"></span>
+                    <span id="story-category" class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full"></span>
+                </div>
+            </header>
+
+            <!-- Story Content -->
+            <div class="markdown-content">
+                <div id="markdown-content"></div>
+            </div>
+
+            <!-- Story Navigation -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="flex justify-between items-center">
+                    <button id="prev-story" class="text-blue-600 hover:text-blue-800 hidden">
+                        <i class="fas fa-arrow-left mr-2"></i>前の体験談
+                    </button>
+                    <button id="next-story" class="text-blue-600 hover:text-blue-800 hidden">
+                        次の体験談<i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Share Section -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">この体験談をシェアする</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-blue-600 hover:text-blue-800">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="#" class="text-blue-600 hover:text-blue-800">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                    <a href="#" class="text-blue-600 hover:text-blue-800">
+                        <i class="fab fa-line"></i> LINE
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2025 パパの育休体験談. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ページ読み込み時の処理
+        document.addEventListener('DOMContentLoaded', () => {
+            // marked.jsの設定
+            marked.setOptions({
+                gfm: true,
+                breaks: true,
+                pedantic: false,
+                sanitize: false,
+                smartLists: true,
+                smartypants: true
+            });
+
+            // URLからストーリー番号を取得
+            const path = window.location.pathname;
+            const storyNumber = path.includes('story-detail-') 
+                ? path.split('story-detail-')[1].split('.')[0]
+                : '1'; // デフォルトは1
+
+            loadStory(storyNumber);
+            setupNavigation(storyNumber);
+        });
+
+        // ストーリーを読み込む
+        async function loadStory(storyNumber) {
+            try {
+                // メタデータを読み込む
+                const response = await fetch('stories/content/stories.json');
+                const stories = await response.json();
+                const storyId = `story${storyNumber}`;
+                
+                if (stories[storyId]) {
+                    const story = stories[storyId];
+                    
+                    // メタデータを表示
+                    document.getElementById('story-title').textContent = story.title;
+                    document.getElementById('story-date').textContent = story.date;
+                    document.getElementById('story-category').textContent = story.category;
+                    
+                    // Markdownコンテンツを読み込む
+                    const contentResponse = await fetch(`stories/content/${story.file}`);
+                    const content = await contentResponse.text();
+                    
+                    // Markdownをレンダリング
+                    document.getElementById('markdown-content').innerHTML = marked.parse(content);
+
+                    // タイトルを更新
+                    document.title = `${story.title} - パパの育休体験談`;
+                } else {
+                    document.getElementById('markdown-content').innerHTML = '<p>記事が見つかりませんでした。</p>';
+                }
+            } catch (error) {
+                console.error('Error loading story:', error);
+                document.getElementById('markdown-content').innerHTML = '<p>記事の読み込みに失敗しました。</p>';
+            }
+        }
+
+        // ナビゲーションを設定
+        async function setupNavigation(currentNumber) {
+            try {
+                const response = await fetch('stories/content/stories.json');
+                const stories = await response.json();
+                const currentNum = parseInt(currentNumber);
+                
+                const prevButton = document.getElementById('prev-story');
+                const nextButton = document.getElementById('next-story');
+
+                // 前の記事へのナビゲーション
+                if (stories[`story${currentNum - 1}`]) {
+                    prevButton.classList.remove('hidden');
+                    prevButton.onclick = () => {
+                        window.location.href = `story-detail-${currentNum - 1}.html`;
+                    };
+                }
+
+                // 次の記事へのナビゲーション
+                if (stories[`story${currentNum + 1}`]) {
+                    nextButton.classList.remove('hidden');
+                    nextButton.onclick = () => {
+                        window.location.href = `story-detail-${currentNum + 1}.html`;
+                    };
+                }
+            } catch (error) {
+                console.error('Error setting up navigation:', error);
+            }
+        }
+
+        // HTML5 History APIを使用したURLの書き換え
+        function updateURL(storyNumber) {
+            const newURL = `story-detail-${storyNumber}.html`;
+            history.pushState({storyNumber}, '', newURL);
+        }
+
+        // ブラウザの戻る/進むボタンの処理
+        window.onpopstate = function(event) {
+            if (event.state && event.state.storyNumber) {
+                loadStory(event.state.storyNumber);
+                setupNavigation(event.state.storyNumber);
+            }
+        };
+    </script>
+</body>
+</html> 

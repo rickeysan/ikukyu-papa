@@ -1,0 +1,14 @@
+{
+    "story1": {
+        "title": "育休中に転職活動した話",
+        "date": "2025年3月15日",
+        "category": "育児と仕事",
+        "file": "story1.md"
+    },
+    "story2": {
+        "title": "3ヶ月の育休で得た気づき",
+        "date": "2024年2月20日",
+        "category": "3ヶ月の取得事例",
+        "file": "story2.md"
+    }
+} 
