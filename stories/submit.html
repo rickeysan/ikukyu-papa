@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体験談を投稿 - イクキュウパパ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .success-message {
+            display: none;
+            color: #198754;
+            margin-top: 1rem;
+        }
+        .error-message {
+            display: none;
+            color: #dc3545;
+            margin-top: 1rem;
+        }
+        .invalid-feedback {
+            display: none;
+        }
+        .was-validated .form-control:invalid ~ .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ5XCCNN5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KJ5XCCNN5D');
+</script>
+<body class="min-h-screen from-blue-50 to-indigo-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-edit text-blue-600 text-2xl"></i>
+                        <h1 class="text-2xl font-bold text-gray-900">パパの育休体験談</h1>
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="../index.html#stories" class="text-gray-700 hover:text-blue-600 font-medium">体験談</a>
+                    <a href="../index.html#categories" class="text-gray-700 hover:text-blue-600 font-medium">カテゴリー</a>
+                    <a href="../about-ikukyu.html" class="text-gray-700 hover:text-blue-600 font-medium">制度について</a>
+                    <a href="../index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">このサイトについて</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-3xl font-bold mb-4">育休体験談を投稿</h1>
+            <p class="mb-4">あなたの育休体験をシェアしてください。他のパパたちの参考になります！</p>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" id="submit-form" class="needs-validation" novalidate>
+                <input type="hidden" name="access_key" value="12823ec3-13dc-45a6-afc4-4fe032bacf8f">
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">お名前（ニックネーム可）</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                    <div class="invalid-feedback">
+                        お名前を入力してください
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">メールアドレス</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        メールアドレスを入力してください
+                    </div>
+                    <div class="form-text">※投稿の確認のためにのみ使用します</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">タイトル</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                    <div class="invalid-feedback">
+                        タイトルを入力してください
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="duration" class="form-label">育休取得期間</label>
+                    <input type="text" class="form-control" id="duration" name="duration" required>
+                    <div class="invalid-feedback">
+                        育休取得期間を入力してください
+                    </div>
+                    <div class="form-text">例：3ヶ月、1年間　など</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="story" class="form-label">体験談</label>
+                    <textarea class="form-control" id="story" name="story" rows="10" required maxlength="2000"></textarea>
+                    <div class="invalid-feedback">
+                        体験談を入力してください
+                    </div>
+                    <div class="form-text">
+                        以下のような内容を含めていただけると参考になります：<br>
+                        - 育休を取得した理由<br>
+                        - 育休中の1日のスケジュール<br>
+                        - 大変だったこと、工夫したこと<br>
+                        - 育休を通じて得られたもの
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="advice" class="form-label">これから育休を取得する人へのアドバイス</label>
+                    <textarea class="form-control" id="advice" name="advice" rows="5" required maxlength="2000"></textarea>
+                    <div class="invalid-feedback">
+                        アドバイスを入力してください
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="submit-button">投稿する</button>
+            </form>
+
+            <div class="success-message" id="success-message">
+                投稿ありがとうございました！内容を確認の上、サイトに掲載させていただきます。
+            </div>
+            <div class="error-message" id="error-message">
+                申し訳ありません。投稿中にエラーが発生しました。時間をおいて再度お試しください。
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-edit text-blue-400 text-xl"></i>
+                        <h4 class="text-xl font-bold">パパの育休体験談</h4>
+                    </div>
+                    <p class="text-gray-400 mb-4">父親の育児休業体験談をまとめたリンク集サイトです。</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">サイトについて</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#about" class="hover:text-white">このサイトについて</a></li>
+                        <li><a href="#" class="hover:text-white">利用規約</a></li>
+                        <li><a href="#" class="hover:text-white">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">お問い合わせ</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">お問い合わせフォーム</a></li>
+                        <li><a href="#" class="hover:text-white">よくある質問</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 パパの育休体験談. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('submit-form');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const submitButton = document.getElementById('submit-button');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!form.checkValidity()) {
+                e.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 送信中...';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    form.reset();
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                } else {
+                    throw new Error('送信に失敗しました');
+                }
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                submitButton.disabled = false;
+                submitButton.innerHTML = '投稿する';
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
